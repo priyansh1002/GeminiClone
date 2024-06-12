@@ -6,7 +6,12 @@ import { Context } from '../../context/context'
 const Main = () => {
 
     const { onSent, recentPrompt, showResult, loading, resultData, setInput, input } = useContext(Context);  //this dangerouslyhtmltag helps in diaplying all the tags that are available in that text
-
+     const handleKeyDown = (event) => {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            onSent();
+        }
+    };
+    
     return (
         <div className='main'>
             <div className="nav">
@@ -62,7 +67,7 @@ const Main = () => {
                 
                 <div className="main-bottom">
                     <div className="search-box">
-                        <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder='Enter a prompt here' />
+                        <input onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} value={input} type="text" placeholder='Enter a prompt here' />
                         <div>
                             <img src={assets.gallery_icon} alt="" />
                             <img src={assets.mic_icon} alt="" />
